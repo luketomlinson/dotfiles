@@ -103,9 +103,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gs="git status"
 alias c="clear"
-alias bw="cd /workspaces/actions/actions-broker-worker"
-alias bl="cd /workspaces/actions/actions-broker-listener"
-alias adn="cd /workspaces/actions/actions-dotnet/src"
+alias ww="cd /workspaces/actions/actions-broker-worker"
+alias ll="cd /workspaces/actions/actions-broker-listener"
+alias dd="cd /workspaces/actions/actions-dotnet/src"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
