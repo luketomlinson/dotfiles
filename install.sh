@@ -3,9 +3,9 @@
 current_dir=$(pwd)
 
 merge_zsh_config(){
-  echo "Copying contents of .zshrc from $HOME/.zshrc to $script_dir/.zshrc"
+  echo "Copying contents of .zshrc $current_dir/.zshrc" $HOME/.zshrc
   if [[ -n "$CODESPACES" && -e "$HOME/.zshrc" ]]; then
-    less "$HOME/.zshrc" >> "$current_dir/.zshrc"
+    cat "$current_dir/.zshrc" >> "$HOME/.zshrc"
   fi
 }
 
