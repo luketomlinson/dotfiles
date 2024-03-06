@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git kubectl)
 
 ZSH_DISABLE_COMPFIX=true
 
@@ -106,6 +106,9 @@ alias c="clear"
 alias ww="cd /workspaces/actions/actions-broker-worker"
 alias ll="cd /workspaces/actions/actions-broker-listener"
 alias dd="cd /workspaces/actions/actions-dotnet/src"
+alias luke="echo Your dotfiles are working"
+
+git config --global push.autoSetupRemote true
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
