@@ -106,6 +106,7 @@ alias c="clear"
 alias ww="cd /workspaces/actions/actions-broker-worker"
 alias ll="cd /workspaces/actions/actions-broker-listener"
 alias dd="cd /workspaces/actions/actions-dotnet/src"
+alias rl="kubectl rollout restart -n actions-broker-listener deployment/listener" # reload listener
 alias luke="echo Your dotfiles are working"
 
 git config --global push.autoSetupRemote true
