@@ -1,0 +1,151 @@
+# Scale Sets
+@pat = 
+@fg_pat=
+
+@weak_pat=
+
+@manage_runners_pat=
+
+@rand_jwt=
+
+###
+
+POST http://api.github.localhost/orgs/github/actions/runners/scalesets HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+content-type: application/json
+
+{
+  "name": "my-scaleset-4",
+  "runnerGroupId": 1
+}
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/scalesets HTTP/1.1
+Authorization: Bearer 
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/scalesets HTTP/1.S
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+###
+GET http://api.github.localhost/orgs/github/actions/runners/scalesets/2 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+###
+PATCH http://api.github.localhost/orgs/github/actions/runners/scalesets/2 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+{
+  "name": "amazing-new-name"
+}
+
+###
+DELETE http://api.github.localhost/orgs/github/actions/runners/scalesets/4 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/_shim/_apis/runtime/runnerscalesets/2 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/_shim/_apis/runtime/runnerscalesets HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb25hbGlzYSIsImlhdCI6MTczNzQ5NzYwNiwiZXhwIjoxNzM3NTAxMjA2fQ.nj6Jna3tjq7uUmMivNa5RKVLSwb_l33fQLe1skcnzc0
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/scalesets/2 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+###
+
+
+DELETE http://api.github.localhost/orgs/github/actions/runners/scalesets/1 HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+###
+
+# @name rrt
+POST http://api.github.localhost/orgs/github/actions/runners/registration-token HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+# @runnerRegistrationToken = {{rrt.response.body.$.token}}
+
+###
+
+POST http://api.github.localhost/actions/runner-registration
+Authorization: RemoteAuth AAAAAAUX3LBAA76X5K6KCZTHSQLHM
+
+{
+  "url": "http://github.localhost/github"
+}
+
+###
+POST http://pipelines.codedev.ms/hzIUtlPCpbEJViIt7Yk92beyCwAPtLyVKDjg493T9C7LgXzGhs/_apis/runtime/runnerscalesets?api-version=6.0-preview
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkRhNkZkVXBONDBUUFFweDA4TzJUeXFOOWd5dyJ9.eyJuYW1laWQiOiJkZGRkZGRkZC1kZGRkLWRkZGQtZGRkZC1kZGRkZGRkZGRkZGQiLCJzY3AiOiJBY3Rpb25zUnVudGltZS5SdW5uZXJNYW5hZ2UgRnJhbWV3b3JrLkdlbmVyaWNSZWFkIElkZW50aXR5LlJlYWRSZWZzIExvY2F0aW9uU2VydmljZS5Db25uZWN0IiwiSWRlbnRpdHlUeXBlQ2xhaW0iOiJTeXN0ZW06U2VydmljZUlkZW50aXR5IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiREREREREREQtRERERC1ERERELUREREQtREREREREREREREREIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9wcmltYXJ5c2lkIjoiZGRkZGRkZGQtZGRkZC1kZGRkLWRkZGQtZGRkZGRkZGRkZGRkIiwiYXVpIjoiMTYwYjY3ZTQtZjhiNi00MzljLTlkYTAtZTBjYTBmMWIyMTEwIiwic2lkIjoiMzk3NGVkZjYtYzBkMy00NGE4LWFjYmEtNGI3MzdhODJkZGVmIiwib3duZXJfaWQiOiJPX2tnQUYiLCJiaWxsaW5nX293bmVyX2lkIjoiRV9rZ0FCIiwiaXNzIjoidnN0b2tlbi5jb2RlZGV2LmxvY2FsaG9zdCIsImF1ZCI6InZzdG9rZW4uY29kZWRldi5sb2NhbGhvc3R8dnNvOjg0YmZiZjk3LTFlYTYtNGYxMy1hN2UwLTVlZjIxY2Q4YWIwOCIsIm5iZiI6MTczNzU4Mjg0MywiZXhwIjoxNzM3NTg0MDQzfQ.OGjjjaHc695OX25OunP5H8x1KEbda7dCd6Sm1qnvwb3nDb3Iesr5VBx_w6yzRlSIECpS-GLR-YEufjXQVSR2Wp2XB_f9fAK03MiVOPwfkyH98VwZrdqZLYJiRp_12wIE8JliBuXkzYh6tqcenfQqz3uCE29H8wcE0wJr2MS4EmgPBeYhvjCIaHW85i8bnY8K1yQvnBQjr4IEnMerJozKC49KGNwWVjD0HHrY7hQm4yjFfLpOgHqtutqiuUI0MXkDrF2Ip8Dd7BdDSKPDvTbdIrKh4OqE3PxfvmLOqHvAxUJnKaKO_Dly_NOfZfPKSgcXjQMxK4r0V0coTJgU3ZHx9YzdUIyz6TPvb0gr2e0owelEciaBZvbsLpCZ0WpZZM5b9ftdMnpDExziS0TWgURyNLlqtkvs1RL1lDLA5mXx6wNzPtwRXOuOYmnWjvcHjYichsdNjwD0jg1ezQXAr3D2GGe_sDIZLhRUP6KyVeBF1xo-z3t_h0EyC_AKU1a0YpBmjeXQLu1Ia8kFTzFDUgkbWiyUyF09-oKj2jqU9B-DMyZfYw_XLnF-lMlzdUtM0jLgmIn5kMlvALvtVD2TzKlQQ-PTFKSNVI4-ZUx5N-bPA8yMWrnT4y-kK1f79vY7Lv9DaX-nelaga8mXCRmFujXIj_GPO4zxwOcJE2gLhj1rA5g
+Content-Type: application/json
+
+{
+  "name": "my-scaleset-2",
+  "runnerGroupId": 1
+}
+
+###
+GET http://pipelines.codedev.ms/hzIUtlPCpbEJViIt7Yk92beyCwAPtLyVKDjg493T9C7LgXzGhs/_apis/runtime/runnerscalesets?api-version=6.0-preview
+Authorization: Bearer 
+Content-Type: application/json
+
+
+###
+
+GET http://api.github.localhost/orgs/github/actions/runners/ HTTP/1.1
+Authorization: Bearer {{pat}}
+X-GitHub-Api-Version: 2022-11-28
+Accept: application/vnd.github.v3+jsonf
+
+
+###
+
+INSTALLATION_NAME="luke-scale-set"
+NAMESPACE="luke-arc-runners"
+GITHUB_CONFIG_URL="http://github.localhost/github"
+GITHUB_PAT=""
+helm install "${INSTALLATION_NAME}" \
+    --namespace "${NAMESPACE}" \
+    --create-namespace \
+    --set githubConfigUrl="${GITHUB_CONFIG_URL}" \
+    --set githubConfigSecret.github_token="${GITHUB_PAT}" \
+    --set minRunners=1 \
+    oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
