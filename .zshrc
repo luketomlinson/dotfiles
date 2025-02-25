@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gs="git status"
 alias c="clear"
+alias ra="cd /workspaces/actions/actions-runner-admin"
 alias ww="cd /workspaces/actions/actions-broker-worker"
 alias ll="cd /workspaces/actions/actions-broker-listener"
 alias dd="cd /workspaces/actions/actions-dotnet/src"
