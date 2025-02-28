@@ -78,6 +78,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+jwt-decode() {
+  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
+}
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
