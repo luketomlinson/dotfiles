@@ -78,6 +78,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+jwt-decode() {
+  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
+}
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -103,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gs="git status"
 alias c="clear"
+alias ra="cd /workspaces/actions/actions-runner-admin"
 alias ww="cd /workspaces/actions/actions-broker-worker"
 alias ll="cd /workspaces/actions/actions-broker-listener"
 alias dd="cd /workspaces/actions/actions-dotnet/src"
