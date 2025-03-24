@@ -176,3 +176,38 @@ decode_jit() {
 jwt-decode() {
   jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)' <<< $1
 }
+
+fix-kube-dns() {
+  # Define the block to be inserted
+HOSTS_BLOCK="        hosts {\n          192.168.49.1 github.localhost\n          192.168.49.1 api.github.localhost\n          192.168.49.1 codeload.github.localhost\n          fallthrough\n        }"
+
+# Temporary file to hold the modified configMap
+TEMPFILE=$(mktemp)
+
+# Fetch the current CoreDNS configMap
+kubectl get cm coredns -n kube-system -o yaml > "$TEMPFILE"
+
+# Check if the hosts entry already exists to avoid duplication
+if grep -q "github.localhost" "$TEMPFILE"; then
+    echo "Hosts entries already exist. Skipping addition."
+else
+    # Insert the new hosts block into the Corefile, right before the 'kubernetes' block
+    awk -v hosts_block="$HOSTS_BLOCK" '/kubernetes cluster.local in-addr.arpa ip6.arpa/{print hosts_block; print; next}1' "$TEMPFILE" > "$TEMPFILE.modified"
+    
+    # Replace the original temporary file with the modified one
+    mv "$TEMPFILE.modified" "$TEMPFILE"
+
+    # Apply the updated configMap
+    kubectl apply -f "$TEMPFILE"
+    echo "CoreDNS configMap updated successfully."
+fi
+
+# Clean up the temporary file
+rm "$TEMPFILE"
+
+# Restart CoreDNS to apply the changes
+kubectl rollout restart -n kube-system deployment/coredns
+echo "CoreDNS restarted successfully."
+}
+
+export KUBE_EDITOR="code --wait"
