@@ -74,7 +74,7 @@ plugins=(git kubectl)
 
 ZSH_DISABLE_COMPFIX=true
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -96,8 +96,6 @@ jwtd() {
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -125,8 +123,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 b64d() {
-    local encoded_value=$1
-    echo "$encoded_value" | base64 --decode | jq .
+  if [ -n "$1" ]; then
+      # If an argument is provided, use it
+      local encoded_value="$1"
+      echo "$encoded_value" | base64 --decode | jq .
+  else
+      # If no argument, read from stdin
+      base64 --decode | jq .
+  fi
 }
 
 decode_jit() {
@@ -136,25 +140,25 @@ decode_jit() {
 
     # echo "input: $input"
 
-    input_json=$(decode_base64 "$input")
+    input_json=$(b64d "$input")
 
     # echo "input_json: $input_json"
 
     # Extract and decode the .runner value
     runner_base64=$(echo "$input_json" | jq -r '.".runner"')
-    runner_decoded=$(decode_base64 "$runner_base64")
+    runner_decoded=$(b64d "$runner_base64")
 
     # echo "runner_decoded: $runner_decoded"
 
     # Extract and decode the .credentials value
     credentials_base64=$(echo "$input_json" | jq -r '.".credentials"')
-    credentials_decoded=$(decode_base64 "$credentials_base64")
+    credentials_decoded=$(b64d "$credentials_base64")
 
     # echo "credentials_decoded: $credentials_decoded"
 
     # Extract and decode the .credentials_rsaparams value
     credentials_rsaparams_base64=$(echo "$input_json" | jq -r '.".credentials_rsaparams"')
-    credentials_rsaparams_decoded=$(decode_base64 "$credentials_rsaparams_base64")
+    credentials_rsaparams_decoded=$(b64d "$credentials_rsaparams_base64")
 
     # echo "credentials_rsaparams_decoded: $credentials_rsaparams_decoded"
 
