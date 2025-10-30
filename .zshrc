@@ -115,6 +115,7 @@ alias rl="kubectl rollout restart -n actions-broker-listener deployment/listener
 alias luke="echo Your dotfiles are working"
 alias cgh="git gc --prune=now"
 alias goproxyfix='echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >"$HOME/.netrc"'
+alias gh="cd /workspaces/github"
 
 git config --global push.autoSetupRemote true
 
